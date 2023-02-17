@@ -268,4 +268,12 @@ class SimpleHeadersSpec extends Http4sSuite {
     assert(`X-Forwarded-For`.parse(bad2).isLeft)
   }
 
+  test("SimpleHeaders should parse Device-Memory") {
+    val header = `Device-Memory`.unsafeFromString("0.25")
+    assertEquals(`Device-Memory`.parse(header.amount), Right(header))
+
+    val bad = "16"
+    assert(`Device-Memory`.parse(bad).isLeft)
+  }
+
 }
